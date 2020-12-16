@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.amazon.tv.leanbacklauncher",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 17,
+      "versionName": "1.17.1",
+      "enabled": true,
+      "outputFile": "LeanbackOnFire_v1.17.1-release.apk"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class LegacyUpdatePreferenceFragment extends GuidedStepSupportFragment {
 
-    private String RELEASES_LINK = "https://api.github.com/repos/tsynik/LeanbackLauncher/releases/latest";
+    private String RELEASES_LINK = "https://api.github.com/repos/Dustmix/LeanbackLauncher/releases/latest";
     private String DOWNLOAD_LINK = null;
 
     @Override
