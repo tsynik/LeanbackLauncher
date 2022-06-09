@@ -93,7 +93,7 @@ class SettingsFragment : LeanbackSettingsFragmentCompat() {
         super.onStop()
         if (needRestartHome) {
             if (BuildConfig.DEBUG) Log.d(TAG, "onStop() send refresh HOME broadcast")
-            Util.refreshHome(LauncherApp.getContext())
+            Util.refreshHome(LauncherApp.context)
         }
     }
 }
@@ -184,7 +184,7 @@ class VersionPreferenceFragment : LeanbackPreferenceFragmentCompat() {
  * The fragment that is defined in prefs.xml
  */
 class HomePreferenceFragment : LeanbackPreferenceFragmentCompat() {
-    private val appContext = LauncherApp.getContext()
+    private val appContext = LauncherApp.context
     private val sortingMode = AppsManager.getSavedSortingMode(appContext)
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         // Load the prefs from an XML resource

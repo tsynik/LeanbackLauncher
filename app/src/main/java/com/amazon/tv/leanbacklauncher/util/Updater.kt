@@ -26,10 +26,10 @@ object Updater {
     fun check(): Boolean {
         try {
             val url = URL(RELEASE_LINK)
-            val conn = url.openConnection() as HttpsURLConnection
-            conn.connect()
+            val conn = url.openConnection() as HttpsURLConnection?
+            conn?.connect()
             val body =
-                conn.inputStream?.bufferedReader(Charset.defaultCharset())?.readText()
+                conn?.inputStream?.bufferedReader(Charset.defaultCharset())?.readText()
                     ?: return false
             val gson = Gson()
             releases = gson.fromJson(body, Releases::class.java)
@@ -121,47 +121,49 @@ object Updater {
                     link = asset.browser_download_url
                 }
                 if (link.isNotEmpty()) {
-                    val url = URL(link)
-                    val conn = url.openConnection() as HttpsURLConnection
-                    conn.connect()
-                    conn.inputStream.use { input ->
-                        FileOutputStream(file).use { fileOut ->
-                            val contentLength = conn.contentLength
-                            if (onProgress == null)
-                                input?.copyTo(fileOut)
-                            else {
-                                val buffer = ByteArray(65535)
-                                val length = contentLength + 1
-                                var offset: Long = 0
-                                while (true) {
-                                    val read = input?.read(buffer) ?: 0
-                                    offset += read
-                                    val prc = (offset * 100 / length).toInt()
-                                    onProgress(prc)
-                                    if (read <= 0)
-                                        break
-                                    fileOut.write(buffer, 0, read)
+                    try {
+                        val url = URL(link)
+                        val conn = url.openConnection() as HttpsURLConnection?
+                        conn?.connect()
+                        conn?.inputStream.use { input ->
+                            FileOutputStream(file).use { fileOut ->
+                                val contentLength = conn?.contentLength ?: 0
+                                if (onProgress == null)
+                                    input?.copyTo(fileOut)
+                                else {
+                                    val buffer = ByteArray(65535)
+                                    val length = contentLength + 1
+                                    var offset: Long = 0
+                                    while (true) {
+                                        val read = input?.read(buffer) ?: 0
+                                        offset += read
+                                        val prc = (offset * 100 / length).toInt()
+                                        onProgress(prc)
+                                        if (read <= 0)
+                                            break
+                                        fileOut.write(buffer, 0, read)
+                                    }
+                                    fileOut.flush()
                                 }
                                 fileOut.flush()
+                                fileOut.close()
                             }
-                            fileOut.flush()
-                            fileOut.close()
                         }
+                        conn?.disconnect()
+                    } catch (e: Exception) {
                     }
-                    conn.disconnect()
                 }
             }
         }
     }
 
     fun installNewVersion(onProgress: ((prc: Int) -> Unit)?) {
-        val ctx = LauncherApp.getContext()
+        val ctx = LauncherApp.context
         if (newVersion == null && !check())
             return
 
         newVersion?.let {
             val destination = File(
-                //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                 ctx.getExternalFilesDir(null),
                 "LeanbackOnFire.apk"
             ).apply {
@@ -177,7 +179,7 @@ object Updater {
                 install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 install.setDataAndType(uri, "application/vnd.android.package-archive")
                 if (install.resolveActivity(ctx.packageManager) != null)
-                    LauncherApp.getContext().startActivity(install)
+                    LauncherApp.context.startActivity(install)
                 else
                     LauncherApp.toast(R.string.error_app_not_found)
             } else {

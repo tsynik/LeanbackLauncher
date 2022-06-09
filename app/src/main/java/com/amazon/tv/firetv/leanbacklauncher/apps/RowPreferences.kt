@@ -359,7 +359,7 @@ object RowPreferences {
     }
 
     fun fixRowPrefs() {
-        val context = LauncherApp.getContext()
+        val context = LauncherApp.context
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val list = listOf(
             context.getString(R.string.pref_banner_focus_frame_color),

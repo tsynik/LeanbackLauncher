@@ -23,7 +23,7 @@ class LegacyUpdatePreferenceFragment : GuidedStepSupportFragment() {
     private val releasesLink =
         "https://api.github.com/repos/tsynik/LeanbackLauncher/releases/latest"
     private var downloadLink: String? = null
-    private val ctx = LauncherApp.getContext()
+    private val ctx = LauncherApp.context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -224,7 +224,7 @@ class LegacyUpdatePreferenceFragment : GuidedStepSupportFragment() {
 
         override fun onPostExecute(f: File?) {
             super.onPostExecute(f)
-            val context = LauncherApp.getContext()
+            val context = LauncherApp.context
             val intent = Intent(Intent.ACTION_VIEW)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

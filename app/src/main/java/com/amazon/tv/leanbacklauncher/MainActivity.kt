@@ -282,7 +282,7 @@ class MainActivity : AppCompatActivity(), OnEditModeChangedListener,
     companion object {
         const val PERMISSIONS_REQUEST_LOCATION = 99
         const val UNINSTALL_CODE = 321
-        val JSONFILE = LauncherApp.getContext().cacheDir?.absolutePath + "/weather.json"
+        val JSONFILE = LauncherApp.context.cacheDir?.absolutePath + "/weather.json"
 
         fun isMediaKey(keyCode: Int): Boolean {
             return when (keyCode) {

@@ -45,9 +45,10 @@ class LauncherApp : Application() {
             }
         }
 
-        fun getContext(): Context {
-            return appContext
-        }
+        val context: Context
+            get() {
+                return appContext
+            }
 
         fun toast(txt: String?, long: Boolean = false) {
             Handler(Looper.getMainLooper()).post {
@@ -137,6 +138,7 @@ class LauncherApp : Application() {
         initDeviceCapabilities()
         initPrimes()
         demigrate()
+
         val autoupdate = PreferenceManager.getDefaultSharedPreferences(appContext)
             .getBoolean("update_check", true)
         if (autoupdate) // self update check
