@@ -1,13 +1,7 @@
 name: Android CI
 
-on:
-  push:
-    branches: [ "kotlinx" ]
-  pull_request:
-    branches: [ "kotlinx" ]
-  paths:
-      - '**.java'
-      - '**.gradle'
+on: [push, pull_request]
+
 jobs:
   build:
 
