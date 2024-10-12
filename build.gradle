@@ -7,6 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        implementation 'com.android.tools.build:gradle-api:8.4.0'
         classpath 'com.android.tools.build:gradle:8.6.1'
         classpath 'com.google.gms:google-services:4.4.2'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2' // Firebase for Crashlytics
