@@ -89,7 +89,6 @@ import com.amazon.tv.leanbacklauncher.util.Permission
 import com.amazon.tv.leanbacklauncher.util.TvSearchIconLoader
 import com.amazon.tv.leanbacklauncher.util.TvSearchSuggestionsLoader
 import com.amazon.tv.leanbacklauncher.util.Util
-import com.amazon.tv.leanbacklauncher.util.breath
 import com.amazon.tv.leanbacklauncher.wallpaper.LauncherWallpaper
 import com.amazon.tv.leanbacklauncher.wallpaper.WallpaperInstaller
 import com.amazon.tv.leanbacklauncher.widget.EditModeView
@@ -1632,7 +1631,6 @@ class MainActivity : AppCompatActivity(), OnEditModeChangedListener,
                                     start()
                                 }
                                 icon?.alpha = 1.0f
-                                icon?.breath()
                             }
                         }
                         sel?.alpha = 0.0f
@@ -1643,7 +1641,6 @@ class MainActivity : AppCompatActivity(), OnEditModeChangedListener,
                             alpha(1.0f)
                             start()
                         }
-                        icon?.breath()
                     }
                     // weather widget update
                     initializeWeather()
